@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { convertToHumanReadable } from "@/lib/utils";
 
 export default function Home() {
   const [tracking, setTracking] = useState(false);
@@ -49,7 +50,27 @@ export default function Home() {
       <button ref={toggleButtonRef} onClick={toggleTracking}>
         {tracking ? "stop tracking" : "track time"}
       </button>
+      {/* raw */}
       <p>{timeTracked}</p>
+      <a
+        onClick={() => {
+          alert(convertToHumanReadable(timeTracked));
+        }}
+        href="#"
+      >
+        human readable
+      </a>
+      {/* human readable */}
+      {/* <div className="flex gap-6 opacity-20">
+        {Object.keys(time).map((key) => {
+          return (
+            <div className="text-center">
+              <div>{key[0].toUpperCase()}</div>
+              <div>{`${String(time[key]).padStart(2, "0")}`}</div>
+            </div>
+          );
+        })}
+      </div> */}
     </div>
   );
 }
