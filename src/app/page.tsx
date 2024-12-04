@@ -15,8 +15,10 @@ export default function Home() {
       setTracking(true);
       intervalRef.current = setInterval(() => {
         setTimeTracked((prev) => {
-          localStorage.setItem("TIME_TRACKED", prev + 1 + "");
-          return prev + 1;
+          const tmp = prev + 1;
+          localStorage.setItem("TIME_TRACKED", tmp.toString());
+          document.title = tmp.toString();
+          return tmp;
         });
       }, 1000);
     }
