@@ -6,6 +6,7 @@ export default function Home() {
   const [tracking, setTracking] = useState(false);
   const [timeTracked, setTimeTracked] = useState(0);
   const intervalRef = useRef<any>();
+  const toggleButtonRef = useRef<any>();
 
   // restore persisted data
   useEffect(() => {
@@ -30,11 +31,11 @@ export default function Home() {
     }
   };
 
-  // toggle with keyboard (space key)
+  // toggle with keyboard
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.code === "Space") {
-        toggleTracking();
+        toggleButtonRef.current.click();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -45,7 +46,7 @@ export default function Home() {
 
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center">
-      <button onClick={toggleTracking}>
+      <button ref={toggleButtonRef} onClick={toggleTracking}>
         {tracking ? "stop tracking" : "track time"}
       </button>
       <p>{timeTracked}</p>
