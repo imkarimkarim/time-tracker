@@ -7,7 +7,13 @@ export default function Home() {
   const [timeTracked, setTimeTracked] = useState(0);
   const intervalRef = useRef<any>();
 
-  const handleClick = () => {
+  // restore persisted data
+  useEffect(() => {
+    setTimeTracked(Number(localStorage.getItem("TIME_TRACKED")));
+  }, []);
+
+  // main
+  const toggleTracking = () => {
     if (tracking) {
       setTracking(false);
       clearInterval(intervalRef.current);
@@ -24,13 +30,22 @@ export default function Home() {
     }
   };
 
+  // toggle with keyboard (space key)
   useEffect(() => {
-    setTimeTracked(Number(localStorage.getItem("TIME_TRACKED")));
+    const handleKeyDown = (event) => {
+      if (event.code === "Space") {
+        toggleTracking();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center">
-      <button onClick={handleClick}>
+      <button onClick={toggleTracking}>
         {tracking ? "stop tracking" : "track time"}
       </button>
       <p>{timeTracked}</p>
