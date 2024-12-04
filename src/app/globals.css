@@ -1,21 +1,14 @@
-@tailwind base;
-@tailwind components;
+/* @tailwind base; */
+/* @tailwind components; */
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* debug */
+.d {
+  border: 1px solid red;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dd {
+  border: 1px solid blue;
 }
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.ddd {
+  border: 1px solid green;
 }
